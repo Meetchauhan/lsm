@@ -36,6 +36,14 @@ app.get("/", (req, res) => {
   res.send("Server is ready...!");
 });
 
+pp.use(express.static(path.join(__dirname, "../frontend/dist"))); // Adjust path if needed
+
+// Fallback route for React
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html")); // Adjust path
+  connectDB();
+});
+
 app.listen(PORT, () => {
   console.log(`server is running on port http://localhost:${PORT}`);
   connectDB();
