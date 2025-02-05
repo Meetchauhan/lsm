@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
   res.send("Server is ready...!");
 });
 
-pp.use(express.static(path.join(__dirname, "../frontend/dist"))); // Adjust path if needed
+app.use(express.static(path.join(__dirname, "../frontend/dist"))); // Adjust path if needed
 
 // Fallback route for React
 app.get("*", (req, res) => {
