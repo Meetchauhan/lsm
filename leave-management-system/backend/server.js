@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 4000;
 
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173", "https://lsm-30im.onrender.com"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
@@ -36,16 +36,15 @@ app.use("/api", navigation);
 app.use("/api/admin", adminRouter);
 app.use("/api", mailRouter);
 
-app.get("/", (req, res) => {
-  res.send("Server is ready...!");
-});
-
 app.use(express.static(path.join(__dirname, "../frontend/dist"))); // Adjust path if needed
 
 // Fallback route for React
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html")); // Adjust path
   connectDB();
+});
+app.get("/", (req, res) => {
+  res.send("Server is ready...!");
 });
 
 app.listen(PORT, () => {
