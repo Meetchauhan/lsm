@@ -8,6 +8,7 @@ import navigation from "./router/navigation.route.js";
 import adminRouter from "./router/admin.route.js";
 import mailRouter from "./router/mail.route.js";
 import cors from "cors";
+import path from "path";
 import "./middleware/cron.js";
 
 dotenv.config();
