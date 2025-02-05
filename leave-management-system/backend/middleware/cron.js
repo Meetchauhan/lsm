@@ -1,0 +1,38 @@
+import cron from "node-cron";
+import User from "../model/user.model.js";
+
+cron.schedule("*/5 * * * *", async () => {
+  console.log("Running Cron Job: Adding 2 leaves to all users");
+
+  try {
+    const result = await User.updateMany({}, { $inc: { availableLeave: 2 } });
+
+    const getAllUser = async () => {
+      const response = await fetch("http://localhost:4000/api/user/all-users");
+      try {
+        const result = await response.json();
+        return result;
+      } catch (error) {
+        console.error("Error in cron get all result API", error);
+      }
+    };
+    const getUserProfile = async () => {
+      const response = await fetch("http://localhost:4000/api/user/profile", {
+        credentials: "include",
+      });
+      try {
+        const result = await response.json();
+        return result;
+      } catch (error) {
+        console.error("Error in cron get all result API", error);
+      }
+    };
+    getAllUser();
+    getUserProfile();
+    console.log(
+      `Successfully updated leaves for ${result.modifiedCount} users`
+    );
+  } catch (error) {
+    console.error("Error in cron job:", error);
+  }
+});
