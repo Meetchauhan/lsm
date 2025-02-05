@@ -1,8 +1,6 @@
 import { Table } from "flowbite-react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store/store";
-import { useEffect } from "react";
-import { allLeaves } from "../../../features/leaveSlice";
+import {  useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
 import LeaveItem from "../leaveItem/LeaveItem";
 
 interface LeaveList {
@@ -21,7 +19,7 @@ interface LeaveList {
 }
 
 const AllLeaveLeast = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch>();
   // useEffect(() => {
   //   dispatch(allLeaves({ leavePerPage: "10", page:"2" }));
   // }, [dispatch]);
