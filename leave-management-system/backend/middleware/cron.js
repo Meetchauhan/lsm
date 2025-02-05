@@ -1,7 +1,7 @@
 import cron from "node-cron";
 import User from "../model/user.model.js";
 
-cron.schedule("*/5 * * * *", async () => {
+cron.schedule("0 0 * * *", async () => {
   console.log("Running Cron Job: Adding 2 leaves to all users");
 
   try {
