@@ -22,9 +22,9 @@ interface LeaveList {
 
 const AllLeaveLeast = () => {
   const dispatch = useDispatch<AppDispatch>();
-  useEffect(() => {
-    dispatch(allLeaves({ leavePerPage: "10", page:"2" }));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(allLeaves({ leavePerPage: "10", page:"2" }));
+  // }, [dispatch]);
   const getAllLeaves = useSelector(
     (item: RootState) => item?.leaves?.allLeaves
   );
