@@ -44,7 +44,7 @@ const LeaveItem = ({
   };
   const handleStatus = (status: string) => {
     dispatch(leaveStatus({ userId: userId, leaveId: leaveId, status: status }))
-      .then(() => dispatch(allLeaves()))
+      .then(() => dispatch(allLeaves({ leavePerPage: 5, page: 1 })))
       .then(() => dispatch(leaveTaken()));
     if (status === "Approved") {
       dispatch(

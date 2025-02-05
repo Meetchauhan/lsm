@@ -52,7 +52,7 @@ const AdminLeaveDetail = () => {
   //   );
 
   useEffect(() => {
-    dispatch(allLeaves());
+    dispatch(allLeaves({ leavePerPage: 5, page: 1 }));
   }, [dispatch]);
 
   console.log("leave detail", leaveData);
@@ -129,8 +129,10 @@ const AdminLeaveDetail = () => {
               Leave Type
             </Table.Cell>
             <Table.Cell>
-              <Badge color="gray" className="w-fit">{leaveData?.leaveType}</Badge>
-              </Table.Cell>
+              <Badge color="gray" className="w-fit">
+                {leaveData?.leaveType}
+              </Badge>
+            </Table.Cell>
           </Table.Row>
           <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
