@@ -21,11 +21,11 @@ const initialState: LeaveState = {
   loading: false,
   error: null,
 };
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const getProfile = createAsyncThunk<ProfileData, void>(
   "getProfile",
   async () => {
-    const response = await fetch("http://localhost:4000/api/user/profile", {
+    const response = await fetch(`${API_BASE_URL}/user/profile`, {
       credentials: "include",
     });
     try {
@@ -40,7 +40,7 @@ export const getProfile = createAsyncThunk<ProfileData, void>(
 export const getAdminProfile = createAsyncThunk<ProfileData, void>(
   "getAdminProfile",
   async () => {
-    const response = await fetch("http://localhost:4000/api/admin/profile", {
+    const response = await fetch(`${API_BASE_URL}/admin/profile`, {
       credentials: "include",
     });
     try {

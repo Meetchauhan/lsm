@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // Define the shape of your login response (customize this based on your API response structure)
 interface RegisterResponse {
-  success: boolean | null ;
+  success: boolean | null;
   user: {
     id: string;
     email: string;
@@ -38,13 +38,13 @@ interface RegisterParams {
   password: string;
 }
 // The login async thunk that performs the login API request
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const register = createAsyncThunk<RegisterResponse, RegisterParams>(
   "auth/register",
   async ({ firstName, lastName, email, password }) => {
     const data = { firstName, lastName, email, password };
 
-    const response = await fetch("http://localhost:4000/api/user/register", {
+    const response = await fetch(`${API_BASE_URL}/user/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -67,7 +67,7 @@ export const adminRegister = createAsyncThunk<RegisterResponse, RegisterParams>(
   async ({ firstName, lastName, email, password }) => {
     const data = { firstName, lastName, email, password };
 
-    const response = await fetch("http://localhost:4000/api/admin/register", {
+    const response = await fetch(`${API_BASE_URL}/admin/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

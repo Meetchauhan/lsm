@@ -41,7 +41,7 @@ const initialState: LeaveState = {
   error: null,
   allLeaves: null,
 };
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const leaveRequest = createAsyncThunk<
   LeaveRequestResponse,
   LeaveRequestPayload
@@ -56,7 +56,7 @@ export const leaveRequest = createAsyncThunk<
       reason: reason,
       leaveType: leaveType,
     };
-    const response = await fetch("http://localhost:4000/api/new-leave", {
+    const response = await fetch(`${API_BASE_URL}/new-leave`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +78,7 @@ export const allLeaves = createAsyncThunk<
   { leavePerPage: string | number; page: string | number }
 >("allLeaves", async ({ leavePerPage, page }) => {
   const response = await fetch(
-    `http://localhost:4000/api/all-leaves/${leavePerPage}/${page}`
+    `${API_BASE_URL}/all-leaves/${leavePerPage}/${page}`
   );
   try {
     const result = await response.json();
@@ -91,7 +91,7 @@ export const allLeaves = createAsyncThunk<
 export const fetchLeave = createAsyncThunk<LeaveRequestResponse>(
   "fetchLeave",
   async () => {
-    const response = await fetch("http://localhost:4000/api/user-leaves", {
+    const response = await fetch(`${API_BASE_URL}/user-leaves`, {
       credentials: "include",
     });
     try {
@@ -112,7 +112,7 @@ export const leaveStatus = createAsyncThunk<
     status: status,
     userId: userId,
   };
-  const response = await fetch("http://localhost:4000/api/leave-status", {
+  const response = await fetch(`${API_BASE_URL}/leave-status`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -128,7 +128,7 @@ export const leaveStatus = createAsyncThunk<
 });
 
 export const leaveTaken = createAsyncThunk("leaveTaken", async () => {
-  const response = await fetch("http://localhost:4000/api/leave-taken");
+  const response = await fetch(`${API_BASE_URL}/leave-taken`);
   try {
     const result = await response.json();
     return result;

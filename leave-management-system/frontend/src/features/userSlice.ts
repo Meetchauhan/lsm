@@ -39,9 +39,9 @@ interface EditUserResponse {
   email: string;
   password: string;
 }
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const getUsers = createAsyncThunk("getUsers", async () => {
-  const response = await fetch("http://localhost:4000/api/user/all-users");
+  const response = await fetch(`${API_BASE_URL}/user/all-users`);
   try {
     const result = await response.json();
     return result;
@@ -64,17 +64,14 @@ export const editUserAdmin = createAsyncThunk<
       password: password,
       availableLeave: availableLeave,
     };
-    const response = await fetch(
-      "http://localhost:4000/api/user/editUser-admin",
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(data),
-      }
-    );
+    const response = await fetch(`${API_BASE_URL}/user/editUser-admin`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    });
     try {
       const result = await response.json();
       return result;
@@ -93,7 +90,7 @@ export const editUser = createAsyncThunk<EditUserResponse, EditUserPayload>(
       email: email,
       password: password,
     };
-    const response = await fetch("http://localhost:4000/api/user/editUser", {
+    const response = await fetch(`${API_BASE_URL}/user/editUser`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -113,7 +110,7 @@ export const editUser = createAsyncThunk<EditUserResponse, EditUserPayload>(
 export const deleteUser = createAsyncThunk(
   "deleteUser",
   async (_id: string) => {
-    const response = await fetch("http://localhost:4000/api/user/delete-user", {
+    const response = await fetch(`${API_BASE_URL}/user/delete-user`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

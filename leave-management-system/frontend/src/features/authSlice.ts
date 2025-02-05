@@ -29,14 +29,14 @@ interface LoginParams {
   email: string;
   password: string;
 }
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 // The login async thunk that performs the login API request
 export const login = createAsyncThunk<LoginResponse, LoginParams>(
   "auth/login",
   async ({ email, password }) => {
     const data = { email, password };
 
-    const response = await fetch("http://localhost:4000/api/user/login", {
+    const response = await fetch(`${API_BASE_URL}/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +55,7 @@ export const login = createAsyncThunk<LoginResponse, LoginParams>(
 );
 
 export const logout = createAsyncThunk("logout", async () => {
-  const response = await fetch("http://localhost:4000/api/user/logout", {
+  const response = await fetch(`${API_BASE_URL}/user/logout`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export const logout = createAsyncThunk("logout", async () => {
 });
 
 export const authNavigation = createAsyncThunk("authNavigation", async () => {
-  const response = await fetch("http://localhost:4000/api/auth-navigation", {
+  const response = await fetch(`${API_BASE_URL}/auth-navigation`, {
     credentials: "include",
   });
   try {

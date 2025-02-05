@@ -35,7 +35,7 @@ const initialState: initialState = {
   loading: false,
   error: null,
 };
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const registrationMail = createAsyncThunk(
   "registrationMail",
   async ({ firstName, lastName, email, password }: RegistrationPayload) => {
@@ -45,16 +45,13 @@ export const registrationMail = createAsyncThunk(
       email: email,
       password: password,
     };
-    const response = await fetch(
-      "http://localhost:4000/api/registration-mail",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
+    const response = await fetch(`${API_BASE_URL}/registration-mail`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
     try {
       const result = await response.json();
       return result;
@@ -84,16 +81,13 @@ export const leaveRequestMail = createAsyncThunk(
       leaveType: leaveType,
       reason: reason,
     };
-    const response = await fetch(
-      "http://localhost:4000/api/leave-request-mail",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
+    const response = await fetch(`${API_BASE_URL}/leave-request-mail`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
     try {
       const result = await response.json();
       return result;
@@ -112,16 +106,13 @@ export const leaveApprovedMail = createAsyncThunk(
       endDate: endDate,
       leaveType: leaveType,
     };
-    const response = await fetch(
-      "http://localhost:4000/api/leave-approved-mail",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
+    const response = await fetch(`${API_BASE_URL}/leave-approved-mail`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
     try {
       const result = await response.json();
       return result;
@@ -140,16 +131,13 @@ export const leaveCanceledMail = createAsyncThunk(
       endDate: endDate,
       leaveType: leaveType,
     };
-    const response = await fetch(
-      "http://localhost:4000/api/leave-canceled-mail",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
+    const response = await fetch(`${API_BASE_URL}/leave-canceled-mail`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
     try {
       const result = await response.json();
       return result;

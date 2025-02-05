@@ -19,12 +19,12 @@ interface AuthState {
   error: string | null;
   adminNavigation: string | null;
 }
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const adminLogin = createAsyncThunk<LoginResponse, RequestPayload>(
   "adminLogin",
   async ({ email, password }) => {
     const data = { email, password };
-    const response = await fetch("http://localhost:4000/api/admin/login", {
+    const response = await fetch(`${API_BASE_URL}/admin/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +43,7 @@ export const adminLogin = createAsyncThunk<LoginResponse, RequestPayload>(
 );
 
 export const adminLogout = createAsyncThunk("adminLogout", async () => {
-  const response = await fetch("http://localhost:4000/api/admin/logout", {
+  const response = await fetch(`${API_BASE_URL}/admin/logout`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export const adminLogout = createAsyncThunk("adminLogout", async () => {
 });
 
 export const adminNavigation = createAsyncThunk("adminNavigation", async () => {
-  const response = await fetch("http://localhost:4000/api/admin-navigation", {
+  const response = await fetch(`${API_BASE_URL}/admin-navigation`, {
     credentials: "include",
   });
   try {
