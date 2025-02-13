@@ -1,14 +1,15 @@
 import cron from "node-cron";
 import User from "../model/user.model.js";
 
-cron.schedule("0 0 * * *", async () => {
+cron.schedule("0 */2 * * *", async () => {
   console.log("Running Cron Job: Adding 2 leaves to all users");
+  const API_URL = process.env.FRONTEND_URL;
 
   try {
     const result = await User.updateMany({}, { $inc: { availableLeave: 2 } });
 
     const getAllUser = async () => {
-      const response = await fetch("http://localhost:4000/api/user/all-users");
+      const response = await fetch(`${API_URL}/user/all-users`);
       try {
         const result = await response.json();
         return result;
@@ -17,7 +18,7 @@ cron.schedule("0 0 * * *", async () => {
       }
     };
     const getUserProfile = async () => {
-      const response = await fetch("http://localhost:4000/api/user/profile", {
+      const response = await fetch(`${API_URL}/user/profile`, {
         credentials: "include",
       });
       try {
@@ -27,6 +28,16 @@ cron.schedule("0 0 * * *", async () => {
         console.error("Error in cron get all result API", error);
       }
     };
+    const cronRun = async () => {
+      const response = await fetch("http://localhost:4000/api/cron-mail");
+      try {
+        const result = await response.json();
+        return result;
+      } catch (error) {
+        console.error("Erron in running clone mail", error);
+      }
+    };
+    cronRun()
     getAllUser();
     getUserProfile();
     console.log(

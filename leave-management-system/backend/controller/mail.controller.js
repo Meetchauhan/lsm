@@ -161,3 +161,36 @@ export const leaveCanceledMail = async (req, res) => {
     });
   }
 };
+
+
+export const cronRunMail = async (req, res) => {
+
+  const trasporter = nodemailer.createTransport({
+    service: "GMAIL",
+    port: process.env.GMAIL_PORT,
+    secure: true,
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.MAILPASSWORD,
+    },
+  });
+  const mailOptions = {
+    from: process.env.EMAIL,
+    to: process.env.EMAIL,
+    subject: "Cron Run",
+    html: `<h4>Leave Added</h4>`,
+  };
+  try {
+    const info = await trasporter.sendMail(mailOptions);
+    res.status(200).json({
+      success: true,
+      message: "Cron run successfully...!",
+      data: info,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error in running cron",
+    });
+  }
+};
