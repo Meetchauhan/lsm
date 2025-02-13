@@ -29,7 +29,7 @@ cron.schedule("0 */1 * * *", async () => {
       }
     };
     const cronRun = async () => {
-      const response = await fetch("http://localhost:4000/api/cron-mail");
+      const response = await fetch(`${API_URL}/api/cron-mail`);
       try {
         const result = await response.json();
         return result;
