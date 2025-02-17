@@ -1,12 +1,12 @@
 import cron from "node-cron";
 import User from "../model/user.model.js";
 
-cron.schedule("0 * * * *", async () => {
+cron.schedule("0 0 * * 1", async () => {
   console.log("Running Cron Job: Adding 2 leaves to all users");
   const API_URL = process.env.FRONTEND_URL;
 
   try {
-    const result = await User.updateMany({}, { $inc: { availableLeave: 2 } });
+    const result = await User.updateMany({}, { $inc: { availableLeave: 1 } });
 
     const getAllUser = async () => {
       const response = await fetch(`${API_URL}/user/all-users`);

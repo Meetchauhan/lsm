@@ -13,7 +13,7 @@ interface LeaveData {
   totalLeave: string;
   availableLeave: string;
   status: string;
-  leaveTaken:string | number
+  leaveTaken: string | number;
 }
 
 interface ProfileData {
@@ -32,9 +32,11 @@ interface RootState {
       data: ProfileData;
     };
   };
+  hamburger: {
+    showMenu: boolean;
+  };
 }
 const Layout = () => {
-  // const [leaveTaken, setLeaveTaken] = useState<number>();
   const dispatch = useDispatch<AppDispatch>();
   const leaveData = useSelector(
     (item: RootState) => item?.leaves?.fetchLeave?.data
@@ -45,25 +47,7 @@ const Layout = () => {
   );
   const profile = useSelector((item: RootState) => item?.profile?.value?.data);
   console.log("profile", profile);
-  // const generalLeaveLengths = leaveData?.map((entry) => ({
-  //   leaveStatus: entry.status,
-  //   generalLeaveLength: entry.generalLeave.length,
-  // }));
-  // useEffect(() => {
-  //   setLeaveTaken(() => {
-  //     const leaveTaken = generalLeaveLengths
-  //       ?.filter((item) => item?.leaveStatus !== "Canceled")
-  //       ?.reduce(
-  //         (initialValue, item) => initialValue + item?.generalLeaveLength,
-  //         0
-  //       );
-  //     return leaveTaken;
-  //   });
-  // }, [leaveTaken, generalLeaveLengths]);
-
-  // console.log("leave taken", leaveTaken);
-
-  // console.log("general leave length", generalLeaveLengths);
+  const showMenu = useSelector((item: RootState) => item?.hamburger?.showMenu);
 
   useEffect(() => {
     dispatch(getProfile())
@@ -78,13 +62,12 @@ const Layout = () => {
   return (
     <>
       <Header />
-      <main className="bg-slate-100 py-5">
+      <main className="bg-slate-100 relative pt-16">
+        {showMenu && (
+          <div className="absolute w-[100vw] h-[100%] backdrop-brightness-50 z-10"></div>
+        )}
         {profile !== undefined && (
-          <div className="flex flex-col sm:flex-row pt-5 gap-5 px-10">
-            {/* <CardItem
-              heading="Total Leave"
-              leave={leaveData?.totalLeave ?? "24"}
-            /> */}
+          <div className="flex flex-col sm:flex-row pt-5 gap-0 sm:gap-5 px-10">
             <CardItem
               heading="Available Leave"
               leave={profile?.availableLeaves}

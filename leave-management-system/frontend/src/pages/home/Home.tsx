@@ -20,7 +20,8 @@ const Home = () => {
   };
 
   return (
-    <div className="home max-w-full md:max-w-[991px] lg:max-w-[1199px] xl:max-w-[1920px] mx-auto px-5 w-full py-10">
+    <div className=" relative home max-w-full md:max-w-[991px] lg:max-w-[1199px] xl:max-w-[1920px] mx-auto px-5 w-full py-10">
+      
       <RecentLeave />
       <div className="flex justify-end" color="">
         <Button color="teal" onClick={() => dispatch(openNewLeaveModal())}>
