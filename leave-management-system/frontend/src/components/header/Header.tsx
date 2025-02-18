@@ -11,10 +11,12 @@ const Header = () => {
   const dispatch = useDispatch<AppDispatch>();
   const profile = useSelector((item: RootState) => item?.profile?.value?.data);
   const showMenu = useSelector((item: RootState) => item?.hamburger?.showMenu);
+  console.log("show menu", showMenu);
+  
   const handleLogout = async () => {
     await dispatch(logout());
-
     await navigate("/login", { replace: true });
+    dispatch(closeMenu())
   };
   useEffect(() => {
     if (showMenu) {
