@@ -6,7 +6,7 @@ import { fetchLeave } from "../../features/leaveSlice";
 import CardItem from "../card/Card";
 import { getProfile } from "../../features/profileSlice";
 import FooterComponent from "../footer/Footer";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 interface LeaveData {
   generalLeave: string[];
@@ -37,6 +37,8 @@ interface RootState {
   };
 }
 const Layout = () => {
+  const location = useLocation();
+  
   const dispatch = useDispatch<AppDispatch>();
   const leaveData = useSelector(
     (item: RootState) => item?.leaves?.fetchLeave?.data
@@ -66,7 +68,7 @@ const Layout = () => {
         {showMenu && (
           <div className="absolute w-[100vw] h-[100%] backdrop-brightness-50 z-10"></div>
         )}
-        {profile !== undefined && (
+        {location?.pathname !== "/holiday-list" && profile !== undefined && (
           <div className="flex flex-col sm:flex-row pt-5 gap-0 sm:gap-5 px-10">
             <CardItem
               heading="Available Leave"

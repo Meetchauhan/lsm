@@ -15,6 +15,8 @@ import AdminLayout from "./admin/components/adminLayout/AdminLayout";
 import Users from "./admin/pages/users/Users";
 import AdminLeaveDetail from "./admin/pages/leaveDetail/AdminLeaveDetail";
 import Profile from "./pages/profile/Profile";
+import Holidays from "./admin/pages/holidays/Holidays";
+import HolidayListPage from "./pages/holidayListPage/HolidayListPage";
 
 function App() {
   return (
@@ -31,6 +33,7 @@ function App() {
         <Route path="/leave" element={<Leave />} />
         <Route path="/leave/:id" element={<LeaveDetail />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/holiday-list" element={<HolidayListPage />} />
       </Route>
 
       <Route
@@ -45,7 +48,7 @@ function App() {
         path="/register"
         element={
           // <PublicRoute>
-            <Register />
+          <Register />
           // </PublicRoute>
         }
       />
@@ -59,12 +62,13 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/users" element={<Users />} />
         <Route path="/dashboard/:id" element={<AdminLeaveDetail />} />
+        <Route path="/holidays" element={<Holidays />} />
       </Route>
       <Route
         path="/admin-register"
         element={
           // <PublicRoute>
-            <AdminRegister />
+          <AdminRegister />
           // </PublicRoute>
         }
       />

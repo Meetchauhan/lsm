@@ -48,7 +48,7 @@ export default function Profile() {
 
   return (
     <>
-      <div className="overflow-x-auto px-5 sm:px-10">
+      <div className="overflow-x-auto px-5 py-10 sm:px-10">
         <Table>
           <Table.Body className="divide-y">
             <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">

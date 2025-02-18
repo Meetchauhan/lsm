@@ -35,8 +35,8 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
       : null;
 
   const allowedRoutesForRoles = {
-    user: ["/", "/leave", "/leave/:leaveId", "/profile"],
-    admin: ["/dashboard", "/users", "/dashboard/:leaveId"],
+    user: ["/", "/leave", "/leave/:leaveId", "/profile", "/holiday-list"],
+    admin: ["/dashboard", "/users", "/dashboard/:leaveId", "/holidays"],
   };
 
   const isRouteAllowed = (routeList: string[], path: string) => {

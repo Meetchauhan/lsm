@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 const holidaysListSchema = new mongoose.Schema(
   {
-    HolidaysDate: {
+    holidayDate: {
       type: String,
       required: true,
     },
-    HolidayReason: {
+    holidayReason: {
       type: String,
       required: true,
     },

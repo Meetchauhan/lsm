@@ -18,7 +18,7 @@ const RecentLeave = () => {
   console.log("Leaves", leaves);
 
   return (
-    <div className="py-5">
+    <div className="pb-5">
       <h2 className="text-2xl bg-white p-5">Recent Leave</h2>
       {leaves?.data?.length !== 0 ? (
         <div className="overflow-x-auto">

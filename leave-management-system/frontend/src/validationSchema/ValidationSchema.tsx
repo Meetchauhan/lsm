@@ -36,3 +36,9 @@ export const isUserUpdateSchema = Yup.object().shape({
   email: Yup.string().email().required("Email is required"),
   password: Yup.string().required("Password is required"),
 });
+
+export const addHolidaySchema = Yup.object().shape({
+  holidayDate: Yup.string().required("Holiday date is required"),
+  holidayReason: Yup.string().required("Holiday reason is required"),
+ 
+});

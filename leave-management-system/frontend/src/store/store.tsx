@@ -10,6 +10,7 @@ import isUpdateUserSlice from "../features/isUpdateUserSlice";
 import mailSlice from "../features/mailSlice";
 import paginationSlice from "../features/paginationSlice";
 import hamSlice from "../features/hamSlice";
+import holidaySlice from "../features/holidaySlice";
 
 const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ const store = configureStore({
     email: mailSlice,
     pagination: paginationSlice,
     hamburger: hamSlice,
+    holidays: holidaySlice,
   },
 });
 

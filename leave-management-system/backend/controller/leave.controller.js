@@ -1,3 +1,4 @@
+import HolidayList from "../model/holidaysList.modal.js";
 import Leave from "../model/leave.model.js";
 import User from "../model/user.model.js";
 
@@ -10,6 +11,12 @@ export const newLeave = async (req, res) => {
         .status(400)
         .json({ success: false, message: "No Authorized, No Token" });
     }
+
+    const holidayList = await HolidayList.find({});
+
+    const dateOfHolidays = holidayList?.map((item) =>
+      new Date(item.holidayDate).toDateString()
+    );
 
     const userId = req.user._id;
 
@@ -26,7 +33,9 @@ export const newLeave = async (req, res) => {
     const generalLeave = allDates.filter((item) => {
       const date = new Date(item);
       const dayOfWeek = date.getDay();
-      return dayOfWeek !== 0 && dayOfWeek !== 6;
+
+      if (dayOfWeek === 0 || dayOfWeek === 6) return false;
+      return !dateOfHolidays.includes(date.toDateString());
     });
 
     const requestedLeaveCount = generalLeave.length;
@@ -87,7 +96,7 @@ export const getAllLeave = async (req, res) => {
     .limit(limit)
     .skip(skip);
   const totalLeave = await Leave.countDocuments();
-  
+
   try {
     res.status(200).json({
       success: true,

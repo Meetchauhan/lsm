@@ -7,6 +7,7 @@ import leaveRouter from "./router/leave.route.js";
 import navigation from "./router/navigation.route.js";
 import adminRouter from "./router/admin.route.js";
 import mailRouter from "./router/mail.route.js";
+import holidayRouter from "./router/holiday.route.js";
 import cors from "cors";
 import path from "path";
 import "./middleware/cron.js";
@@ -35,6 +36,7 @@ app.use("/api", leaveRouter);
 app.use("/api", navigation);
 app.use("/api/admin", adminRouter);
 app.use("/api", mailRouter);
+app.use("/api", holidayRouter);
 
 app.use(express.static(path.join(__dirname, "../frontend/dist"))); // Adjust path if needed
 

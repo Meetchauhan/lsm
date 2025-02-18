@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface AuthState {
-  newLeaveValue: boolean; 
-  cancelLeaveValue: boolean; 
-  editUserValue: boolean; 
-  createUserValue: boolean; 
+  newLeaveValue: boolean;
+  cancelLeaveValue: boolean;
+  editUserValue: boolean;
+  createUserValue: boolean;
+  addHolidayValue: boolean;
 }
 
 const initialState: AuthState = {
@@ -12,6 +13,7 @@ const initialState: AuthState = {
   cancelLeaveValue: false,
   editUserValue: false,
   createUserValue: false,
+  addHolidayValue: false,
 };
 const modalSlice = createSlice({
   name: "modalSlice",
@@ -41,6 +43,12 @@ const modalSlice = createSlice({
     closeCreateUserModal: (state) => {
       state.createUserValue = false;
     },
+    openAddHolidayModal: (state) => {
+      state.addHolidayValue = true;
+    },
+    closeAddHolidayModal: (state) => {
+      state.addHolidayValue = false;
+    },
   },
 });
 
@@ -53,6 +61,8 @@ export const {
   closeEditUserModal,
   openCreateUserModal,
   closeCreateUserModal,
+  openAddHolidayModal,
+  closeAddHolidayModal,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

@@ -33,6 +33,7 @@ const AdminHeader = () => {
         <Navbar.Collapse>
           <Link to={"/dashboard"}>Dashboard</Link>
           <Link to="/users">Users</Link>
+          <Link to="/holidays">Holidays</Link>
         </Navbar.Collapse>
         <div className="flex md:order-2">
           <Dropdown

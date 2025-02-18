@@ -73,6 +73,9 @@ const Header = () => {
         <Link className="hover:bg-slate-200 p-1 rounded-md" to="/leave">
           Leave
         </Link>
+        <Link className="hover:bg-slate-200 p-1 rounded-md" to="/holiday-list">
+          Holidays
+        </Link>
       </Navbar.Collapse>
       <Sidebar
         aria-label="Default sidebar example"
@@ -102,11 +105,22 @@ const Header = () => {
               </Link>
             </Sidebar.Item>
             <Sidebar.Item label="Pro">
-              <Link to="/profile" onClick={() => dispatch(closeMenu())}>
-                <span className="block text-sm">{`${profile?.firstName} ${profile?.lastName}`}</span>
+              <Link
+                className=" hover:bg-slate-200 p-1 rounded-md"
+                onClick={() => dispatch(closeMenu())}
+                to="/holiday-list"
+              >
+                Holidays
               </Link>
             </Sidebar.Item>
-            <Sidebar.Item onClick={handleLogout} className="cursor-pointer">Logout</Sidebar.Item>
+            <Sidebar.Item label="Pro">
+              <Link to="/profile" onClick={() => dispatch(closeMenu())}>
+                Profile
+              </Link>
+            </Sidebar.Item>
+            <Sidebar.Item onClick={handleLogout} className="cursor-pointer">
+              Logout
+            </Sidebar.Item>
           </Sidebar.ItemGroup>
         </Sidebar.Items>
       </Sidebar>
