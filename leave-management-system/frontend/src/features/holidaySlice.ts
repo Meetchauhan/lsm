@@ -28,9 +28,9 @@ const initialState: InitialState = {
   loading: false,
   error: null,
 };
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const holidayList = createAsyncThunk("holidayList", async () => {
-  const response = await fetch("http://localhost:4000/api/holidaylist");
+  const response = await fetch(`${API_BASE_URL}/holidaylist`);
   try {
     const result = await response.json();
     return result;
@@ -47,7 +47,7 @@ export const addHoliday = createAsyncThunk<
     holidayDate: holidayDate,
     holidayReason: holidayReason,
   };
-  const response = await fetch("http://localhost:4000/api/add-holiday", {
+  const response = await fetch(`${API_BASE_URL}/add-holiday`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
