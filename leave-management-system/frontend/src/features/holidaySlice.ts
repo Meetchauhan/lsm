@@ -13,6 +13,35 @@ interface AddHolidayResponse {
   };
 }
 
+interface EditHolidayPayload {
+  _id: string;
+  holidayDate: string;
+  holidayReason: string;
+}
+
+interface EditHolidayResponse {
+  success: boolean;
+  data: {
+    _id: string;
+    holidayDate: string;
+    holidayReason: string;
+  };
+}
+
+interface DeleteHolidayPayload {
+  _id: string;
+}
+
+interface DeleteHolidayResponse {
+  success: boolean;
+}
+
+interface InitialStateValue {
+  _id: string;
+  holidayDate: string;
+  holidayReason: string;
+}
+
 interface InitialState {
   value: {
     data: [];
@@ -20,6 +49,7 @@ interface InitialState {
   upcomingHolidays: {
     data: [];
   };
+  editHolidayValue: InitialStateValue | null;
   loading: boolean;
   error: string | null;
 }
@@ -31,6 +61,7 @@ const initialState: InitialState = {
   upcomingHolidays: {
     data: [],
   },
+  editHolidayValue: null,
   loading: false,
   error: null,
 };
@@ -82,10 +113,60 @@ export const addHoliday = createAsyncThunk<
   }
 });
 
+export const editHoliday = createAsyncThunk<
+  EditHolidayResponse,
+  EditHolidayPayload
+>("editHoliday", async ({ _id, holidayDate, holidayReason }) => {
+  const data = {
+    _id: _id,
+    holidayDate: holidayDate,
+    holidayReason: holidayReason,
+  };
+  const response = await fetch(`${API_BASE_URL}/edit-holiday`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  try {
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error in fetch upcoming holiday list", error);
+  }
+});
+
+export const deleteHoliday = createAsyncThunk<
+  DeleteHolidayResponse,
+  DeleteHolidayPayload
+>("deleteHoliday", async ({ _id }) => {
+  const data = {
+    _id: _id,
+  };
+  const response = await fetch(`${API_BASE_URL}/delete-holiday`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  try {
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error in fetch upcoming holiday list", error);
+  }
+});
+
 const holidaySlice = createSlice({
   name: "holidays",
   initialState,
-  reducers: {},
+  reducers: {
+    editHolidayData: (state, action) => {
+      state.editHolidayValue = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(holidayList.pending, (state) => {
@@ -122,5 +203,5 @@ const holidaySlice = createSlice({
       });
   },
 });
-
+export const { editHolidayData } = holidaySlice.actions;
 export default holidaySlice.reducer;

@@ -47,8 +47,9 @@ const HolidayListForUser = () => {
               {holidays?.data?.map((item: HolidayItemType) => (
                 <HolidayItem
                   key={item?._id}
-                  date={item?.holidayDate}
-                  holiday={item?.holidayReason}
+                  holidayDate={item?.holidayDate}
+                  holidayReason={item?.holidayReason}
+                  _id={item?._id}
                 />
               ))}
             </Table.Body>

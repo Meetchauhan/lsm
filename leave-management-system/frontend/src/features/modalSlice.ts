@@ -6,6 +6,7 @@ interface AuthState {
   editUserValue: boolean;
   createUserValue: boolean;
   addHolidayValue: boolean;
+  editHolidayValue: boolean;
 }
 
 const initialState: AuthState = {
@@ -14,6 +15,7 @@ const initialState: AuthState = {
   editUserValue: false,
   createUserValue: false,
   addHolidayValue: false,
+  editHolidayValue: false,
 };
 const modalSlice = createSlice({
   name: "modalSlice",
@@ -49,6 +51,12 @@ const modalSlice = createSlice({
     closeAddHolidayModal: (state) => {
       state.addHolidayValue = false;
     },
+    openEditHolidayModal: (state) => {
+      state.editHolidayValue = true;
+    },
+    closeEditHolidayModal: (state) => {
+      state.editHolidayValue = false;
+    },
   },
 });
 
@@ -63,6 +71,8 @@ export const {
   closeCreateUserModal,
   openAddHolidayModal,
   closeAddHolidayModal,
+  openEditHolidayModal,
+  closeEditHolidayModal,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;
