@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
 import { useEffect } from "react";
 import { holidayList } from "../../features/holidaySlice";
-import HolidayItem from "../../admin/components/holidayItem/HolidayItem";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import HolidayItemForUser from "../holidayItemForUser/HolidayItem";
 
 interface HolidayItemType {
   _id: string;
@@ -45,11 +45,10 @@ const HolidayListForUser = () => {
             </Table.Head>
             <Table.Body className="divide-y">
               {holidays?.data?.map((item: HolidayItemType) => (
-                <HolidayItem
+                <HolidayItemForUser
                   key={item?._id}
                   holidayDate={item?.holidayDate}
                   holidayReason={item?.holidayReason}
-                  _id={item?._id}
                 />
               ))}
             </Table.Body>
