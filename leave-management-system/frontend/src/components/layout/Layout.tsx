@@ -7,6 +7,7 @@ import CardItem from "../card/Card";
 import { getProfile } from "../../features/profileSlice";
 import FooterComponent from "../footer/Footer";
 import { Outlet, useLocation } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
 
 interface LeaveData {
   generalLeave: string[];
@@ -31,6 +32,7 @@ interface RootState {
     value: {
       data: ProfileData;
     };
+    loading: boolean;
   };
   hamburger: {
     showMenu: boolean;
@@ -38,7 +40,7 @@ interface RootState {
 }
 const Layout = () => {
   const location = useLocation();
-  
+
   const dispatch = useDispatch<AppDispatch>();
   const leaveData = useSelector(
     (item: RootState) => item?.leaves?.fetchLeave?.data
@@ -50,10 +52,10 @@ const Layout = () => {
   const profile = useSelector((item: RootState) => item?.profile?.value?.data);
   console.log("profile", profile);
   const showMenu = useSelector((item: RootState) => item?.hamburger?.showMenu);
+  const loading = useSelector((item: RootState) => item?.profile?.loading);
 
   useEffect(() => {
     dispatch(getProfile())
-      // .then(() => dispatch(authNavigation()))
       .then(() => dispatch(fetchLeave()))
       .then(() => dispatch(getProfile()));
   }, [dispatch]);
@@ -64,19 +66,28 @@ const Layout = () => {
   return (
     <>
       <Header />
-      <main className="bg-slate-100 relative pt-16">
+      <main className="bg-slate-100 relative pt-20">
         {showMenu && (
           <div className="absolute w-[100vw] h-[100%] backdrop-brightness-50 z-10"></div>
         )}
-        {location?.pathname !== "/holiday-list" && profile !== undefined && (
-          <div className="flex flex-col sm:flex-row pt-5 gap-0 sm:gap-5 px-10">
-            <CardItem
-              heading="Available Leave"
-              leave={profile?.availableLeaves}
+        {location?.pathname !== "/holiday-list" &&
+          profile !== undefined &&
+          (loading ? (
+            <Skeleton
+              baseColor="#cac9db"
+              duration={2}
+              height={100}
+              highlightColor="#f7c0b5"
             />
-            <CardItem heading="Leave Taken" leave={profile?.leaveTaken} />
-          </div>
-        )}
+          ) : (
+            <div className="flex flex-col sm:flex-row pt-5 gap-0 sm:gap-5 px-10">
+              <CardItem
+                heading="Available Leave"
+                leave={profile?.availableLeaves}
+              />
+              <CardItem heading="Leave Taken" leave={profile?.leaveTaken} />
+            </div>
+          ))}
         <Outlet />
       </main>
       <FooterComponent />

@@ -2,6 +2,7 @@ import { Table } from "flowbite-react";
 import { RootState } from "../../store/store";
 import { useSelector } from "react-redux";
 import LeaveItem from "../LeaveItem/LeaveItem";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 interface RecentLeave {
   _id: string;
@@ -14,13 +15,29 @@ interface RecentLeave {
 
 const RecentLeave = () => {
   const leaves = useSelector((item: RootState) => item?.leaves?.fetchLeave);
+  const loading = useSelector((item: RootState) => item?.leaves?.loading);
 
   console.log("Leaves", leaves);
 
   return (
     <div className="pb-5">
       <h2 className="text-2xl bg-white p-5">Recent Leave</h2>
-      {leaves?.data?.length !== 0 ? (
+      {loading ? (
+        <SkeletonTheme>
+          <Skeleton
+            baseColor="#cac9db"
+            duration={2}
+            height={40}
+            highlightColor="#f7c0b5"
+          />
+          <Skeleton
+            baseColor="#cac9db"
+            duration={2}
+            height={40}
+            highlightColor="#f7c0b5"
+          />
+        </SkeletonTheme>
+      ) : leaves?.data?.length !== 0 ? (
         <div className="overflow-x-auto">
           <Table
             hoverable

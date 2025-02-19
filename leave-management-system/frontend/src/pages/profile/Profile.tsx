@@ -10,6 +10,7 @@ import {
   closeEditUserModal,
   openEditUserModal,
 } from "../../features/modalSlice";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 export default function Profile() {
   const dispatch = useDispatch<AppDispatch>();
@@ -46,33 +47,47 @@ export default function Profile() {
     },
   });
 
+  const loading = useSelector((item: RootState) => item?.profile?.loading);
+
   return (
     <>
       <div className="overflow-x-auto px-5 py-10 sm:px-10">
-        <Table>
-          <Table.Body className="divide-y">
-            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Name
-              </Table.Cell>
-              <Table.Cell>
-                {userProfile?.firstName} {userProfile?.lastName}
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Email
-              </Table.Cell>
-              <Table.Cell>{userProfile?.email}</Table.Cell>
-            </Table.Row>
-            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-              <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                Password
-              </Table.Cell>
-              <Table.Cell>{userProfile?.password}</Table.Cell>
-            </Table.Row>
-          </Table.Body>
-        </Table>
+        {loading ? (
+          <SkeletonTheme>
+            <Skeleton
+              baseColor="#cac9db"
+              duration={2}
+              height={40}
+              highlightColor="#f7c0b5"
+              count={3}
+            />
+          </SkeletonTheme>
+        ) : (
+          <Table>
+            <Table.Body className="divide-y">
+              <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                  Name
+                </Table.Cell>
+                <Table.Cell>
+                  {userProfile?.firstName} {userProfile?.lastName}
+                </Table.Cell>
+              </Table.Row>
+              <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                  Email
+                </Table.Cell>
+                <Table.Cell>{userProfile?.email}</Table.Cell>
+              </Table.Row>
+              <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                  Password
+                </Table.Cell>
+                <Table.Cell>{userProfile?.password}</Table.Cell>
+              </Table.Row>
+            </Table.Body>
+          </Table>
+        )}
         <div className="flex justify-end my-5">
           <Button color="light" onClick={() => dispatch(openEditUserModal())}>
             Edit Profile

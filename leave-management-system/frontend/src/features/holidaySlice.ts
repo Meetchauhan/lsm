@@ -17,6 +17,9 @@ interface InitialState {
   value: {
     data: [];
   };
+  upcomingHolidays: {
+    data: [];
+  };
   loading: boolean;
   error: string | null;
 }
@@ -25,10 +28,14 @@ const initialState: InitialState = {
   value: {
     data: [],
   },
+  upcomingHolidays: {
+    data: [],
+  },
   loading: false,
   error: null,
 };
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export const holidayList = createAsyncThunk("holidayList", async () => {
   const response = await fetch(`${API_BASE_URL}/holidaylist`);
   try {
@@ -38,6 +45,19 @@ export const holidayList = createAsyncThunk("holidayList", async () => {
     console.error("Error in fetch holiday list", error);
   }
 });
+
+export const upcomingHolidays = createAsyncThunk(
+  "upcomingHolidays",
+  async () => {
+    const response = await fetch(`${API_BASE_URL}/upcoming-holidays`);
+    try {
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.error("Error in fetch upcoming holiday list", error);
+    }
+  }
+);
 
 export const addHoliday = createAsyncThunk<
   AddHolidayResponse,
@@ -86,6 +106,17 @@ const holidaySlice = createSlice({
         state.loading = false;
       })
       .addCase(addHoliday.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Something is wrong!";
+      })
+      .addCase(upcomingHolidays.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(upcomingHolidays.fulfilled, (state, action) => {
+        state.loading = false;
+        state.upcomingHolidays = action.payload;
+      })
+      .addCase(upcomingHolidays.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Something is wrong!";
       });
