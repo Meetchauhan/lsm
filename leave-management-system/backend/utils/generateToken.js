@@ -5,7 +5,7 @@ export const generateToken = (res, userId) => {
     expiresIn: "1d",
   });
   res.cookie("jwt", token, {
-    httpOnly: true,
+    httpOnly: false,
     secure: true,
     sameSite: "None",
     maxAge: 24 * 60 * 60 * 1000,
@@ -17,7 +17,7 @@ export const generateAdminToken = (res, adminId) => {
     expiresIn: "1d",
   });
   res.cookie("jwt_admin", token, {
-    httpOnly: true,
+    httpOnly: false,
     secure: true,
     sameSite: "None",
     maxAge: 24 * 60 * 60 * 1000,

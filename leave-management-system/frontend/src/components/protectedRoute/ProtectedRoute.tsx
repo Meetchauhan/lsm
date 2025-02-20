@@ -2,6 +2,7 @@ import { useLocation, Navigate } from "react-router-dom";
 import { ReactNode } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import Cookies from "js-cookie";
 
 interface ProtectedRouteProps {
   children: ReactNode; // Define the type for children
@@ -15,22 +16,26 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   const isAuth = useSelector(
     (state: RootState) => state?.auth?.navigation?.success
   );
+  const userCookie = Cookies.get("jwt");
+  const adminCookie = Cookies.get("jwt_admin");
 
   // const isAdminAuth = useSelector(
   //   (state: RootState) => state?.adminAuth?.adminNavigation?.success
   // );
 
-  const isUser = JSON.parse(localStorage.getItem("auth") || "null");
-  const isAdmin = JSON.parse(localStorage.getItem("admin-auth") || "null");
+  // const isUser = JSON.parse(localStorage.getItem("auth") || "null");
+  // const isAdmin = JSON.parse(localStorage.getItem("admin-auth") || "null");
+  const isUser = userCookie;
+  const isAdmin = adminCookie;
   const { pathname } = useLocation();
 
   console.log("isUser", isUser);
   console.log("isAdmin", isAdmin);
 
   const currentRole =
-    isAuth || isUser?.success
+    isAuth || (isUser !== undefined && isUser)
       ? "user"
-      : isAdmin || isAdmin?.success
+      : isAdmin || (isAdmin !== undefined && isAdmin)
       ? "admin"
       : null;
 
