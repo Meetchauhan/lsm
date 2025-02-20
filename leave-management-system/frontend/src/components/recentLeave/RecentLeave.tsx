@@ -25,16 +25,16 @@ const RecentLeave = () => {
       {loading ? (
         <SkeletonTheme>
           <Skeleton
-            baseColor="#cac9db"
+            baseColor="#dddcdf9c"
             duration={2}
             height={40}
-            highlightColor="#f7c0b5"
+            highlightColor="#f2d2cb"
           />
           <Skeleton
-            baseColor="#cac9db"
+            baseColor="#dddcdf9c"
             duration={2}
             height={40}
-            highlightColor="#f7c0b5"
+            highlightColor="#f2d2cb"
           />
         </SkeletonTheme>
       ) : leaves?.data?.length !== 0 ? (

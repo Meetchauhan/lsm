@@ -53,11 +53,11 @@ const Header = () => {
         <div className="md:order-2 hidden md:flex">
           {loading ? (
             <Skeleton
-              baseColor="#cac9db"
+              baseColor="#dddcdf9c"
               duration={1}
               height={40}
               width={40}
-              highlightColor="#f7c0b5"
+              highlightColor="#f2d2cb"
             />
           ) : (
             <Dropdown

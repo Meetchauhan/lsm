@@ -113,7 +113,7 @@ const authSlice = createSlice({
       .addCase(logout.fulfilled, (state, action) => {
         state.loading = false;
         state.value = action.payload;
-        localStorage.removeItem("auth");
+        // localStorage.removeItem("auth");
       })
       .addCase(logout.rejected, (state, action) => {
         state.loading = false;
@@ -125,12 +125,12 @@ const authSlice = createSlice({
       .addCase(authNavigation.fulfilled, (state, action) => {
         state.loading = false;
         state.navigation = action.payload;
-        localStorage.setItem("auth", JSON.stringify(action.payload));
+        // localStorage.setItem("auth", JSON.stringify(action.payload));
       })
       .addCase(authNavigation.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Something went wrong";
-        localStorage.removeItem("auth");
+        // localStorage.removeItem("auth");
       });
   },
 });

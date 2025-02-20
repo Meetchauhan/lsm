@@ -73,12 +73,14 @@ const Layout = () => {
         {location?.pathname !== "/holiday-list" &&
           profile !== undefined &&
           (loading ? (
-            <Skeleton
-              baseColor="#cac9db"
-              duration={2}
-              height={100}
-              highlightColor="#f7c0b5"
-            />
+            <div className="px-5">
+              <Skeleton
+                baseColor="#dddcdf9c"
+                duration={2}
+                height={100}
+                highlightColor="#f2d2cb"
+              />
+            </div>
           ) : (
             <div className="flex flex-col sm:flex-row pt-5 gap-0 sm:gap-5 px-10">
               <CardItem

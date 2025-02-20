@@ -85,6 +85,7 @@ const LeaveRequestModel: React.FC<LeaveRequestModelProps> = ({
             leaveType: value.leaveType,
           })
         );
+        handleCloseModel();
         await dispatch(fetchLeave());
         await dispatch(getProfile());
         await dispatch(leaveTaken());
@@ -98,8 +99,8 @@ const LeaveRequestModel: React.FC<LeaveRequestModelProps> = ({
             firstName: userData?.firstName || "",
             lastName: userData?.lastName || "",
           })
-        );
-        handleCloseModel();
+        );  
+
       },
     });
   console.log("leave request value", values);
@@ -213,7 +214,7 @@ const LeaveRequestModel: React.FC<LeaveRequestModelProps> = ({
             </div>
 
             <div className="w-full">
-              <Button type="submit">Submit</Button>
+              <Button type="submit">{"Submit"}</Button>
             </div>
           </form>
         </div>

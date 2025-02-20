@@ -24,10 +24,10 @@ const LeaveList = () => {
       {loading ? (
         <SkeletonTheme>
           <Skeleton
-            baseColor="#cac9db"
+            baseColor="#dddcdf9c"
             duration={2}
             height={40}
-            highlightColor="#f7c0b5"
+            highlightColor="#f2d2cb"
             count={2}
           />
         </SkeletonTheme>

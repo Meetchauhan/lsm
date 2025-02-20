@@ -101,7 +101,7 @@ const adminAuth = createSlice({
       .addCase(adminLogout.fulfilled, (state, action) => {
         state.loading = false;
         state.value = action.payload;
-        localStorage.removeItem("admin-auth");
+        // localStorage.removeItem("admin-auth");
       })
       .addCase(adminLogout.rejected, (state, action) => {
         state.loading = false;
@@ -113,12 +113,12 @@ const adminAuth = createSlice({
       .addCase(adminNavigation.fulfilled, (state, action) => {
         state.loading = false;
         state.adminNavigation = action.payload;
-        localStorage.setItem("admin-auth", JSON.stringify(action.payload));
+        // localStorage.setItem("admin-auth", JSON.stringify(action.payload));
       })
       .addCase(adminNavigation.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Something went wrong";
-        localStorage.removeItem("admin-auth");
+        // localStorage.removeItem("admin-auth");
       });
   },
 });
